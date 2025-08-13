@@ -1,9 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Button Clicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
 
+        #clicker-container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
+        h1 {
+            color: #333;
+        }
 
+        #click-count {
+            font-size: 3em;
+            font-weight: bold;
+            color: #007bff;
+            margin: 20px 0;
+        }
 
+        #click-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
 
+        #click-button:hover {
+            background-color: #218838;
+        }
 
+        #click-button:active {
+            transform: scale(0.98);
+        }
 
+        #message {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #666;
+            min-height: 25px; /* Ensures the element doesn't collapse */
+        }
+    </style>
+</head>
+<body>
 
-m
+    <div id="clicker-container">
+        <h1>Advanced Clicker</h1>
+        <p>Clicks: <span id="click-count">0</span></p>
+        <button id="click-button">Click Me!</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const clickButton = document.getElementById('click-button');
+            const clickCountSpan = document.getElementById('click-count');
+            const messageParagraph = document.getElementById('message');
+            let clickCount = 0;
+
+            const messages = {
+                1: "First click! Keep going!",
+                10: "You've reached 10 clicks!",
+                25: "Wow, 25 clicks already!",
+                50: "Half a hundred! Impressive!",
+                100: "Congratulations! You hit 100 clicks!"
+            };
+
+            clickButton.addEventListener('click', () => {
+                clickCount++;
+                clickCountSpan.textContent = clickCount;
+
+                if (messages[clickCount]) {
+                    messageParagraph.textContent = messages[clickCount];
+                } else if (clickCount > 100 && clickCount % 50 === 0) {
+                     messageParagraph.textContent = `You're on a roll! Reached ${clickCount} clicks!`;
+                } else if (clickCount > 100) {
+                     messageParagraph.textContent = "";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
